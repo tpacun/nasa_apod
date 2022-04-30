@@ -1,5 +1,5 @@
-//Example fetch using pokemonapi.co
-document.querySelector('button').addEventListener('click', getFetch)
+document.querySelector('button[name="submit"]').addEventListener('click', getFetch)
+document.querySelector('button[name="savebutton"]').addEventListener('click', savePhoto)
 
 function getFetch(){
   const choice = document.querySelector('input').value
@@ -8,8 +8,11 @@ function getFetch(){
   fetch(url)
       .then(res => res.json()) // parse response as JSON
       .then(data => {
-        document.querySelector('h3').innerText = data.explanation
-        console.log(data)
+        document.querySelector('main').classList.add('fade-in')
+        document.querySelector('.title').innerText = `Photo of the day for ${data.date}`
+        document.querySelector('.photoTitle').innerText = data.title
+        document.querySelector('.author').innerText = data.copyright
+        document.querySelector('.information').innerText = data.explanation
         if(data.media_type === 'image') {
           document.querySelector('img').src = data.hdurl
         }
@@ -20,5 +23,9 @@ function getFetch(){
       .catch(err => {
           console.log(`error ${err}`)
       });
+}
+
+function savePhoto() {
+  console.log(data.hdurl)
 }
 

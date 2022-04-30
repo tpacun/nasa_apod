@@ -10,12 +10,63 @@
 /******************************************
 /* LAYOUT
 /*******************************************/
-img{
-  display: block;
-  margin: 0 auto;
+body {
+  background-color: #2d2d2d;
 }
 
+body > * {
+  float:left;
+  transition: all 1s;
+}
+
+header {
+  width: 100%;
+}
+
+nav {
+  width: 33%
+}
+
+main {
+  width: 67%
+}
+
+header, nav, main {
+  padding: 5%;
+}
+
+img {
+  width: 100%;
+}
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+.fade-in {
+  animation: fadeIn 5s;
+  -webkit-animation: fadeIn 5s;
+  -moz-animation: fadeIn 5s;
+  -o-animation: fadeIn 5s;
+  -ms-animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}

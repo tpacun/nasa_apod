@@ -5,23 +5,29 @@
     	<meta name="description" content="This is where your description goes">
     	<meta name="keywords" content="one, two, three">
 
-		<title>Title in the tab</title>
+		<title>NASA APOD App</title>
 
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<h1>NASA APOD</h1>
-		<input type="date" name="" value="">
-		<button type="button" name="button">Get Photo</button>
-
-		<h2>Photo of the day</h2>
-		<iframe src="" frameborder="0"></iframe>
-		<img src="">
-		<h3>Other information</h3>
-		<p></p>
-
+		<header>
+			<h1>NASA APOD</h1>
+		</header>
+		<nav>
+			<input type="date" name="" value="">
+			<button type="button" name="submit">Get Photo</button>
+			<button type="button" name="savebutton">Save this Photo</button>
+		</nav>
+		<main>
+			<h2 class="title">Photo of the day</h2>
+			<p class="photoTitle"></p>
+			<img src="">
+			<h3>Other information</h3>
+			<p class="author"></p>
+			<p class="information"></p>
+		</main>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
