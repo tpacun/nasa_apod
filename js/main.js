@@ -48,4 +48,5 @@ function saveHistory(obj) {
 
 function saveFavorite(obj) {
   localStorage.setItem(obj.date, 'true')
+  // document.querySelector('button[name="savebutton"]').innerText = 'Remove Photo From Favorites'
 }
