@@ -1,19 +1,26 @@
-const selectedDate = document.querySelector('input').value
 const baseUrl = `https://api.nasa.gov/planetary/apod?api_key=8chDM5TyNYtiZItHmQXpukw3SIpAkUaQei3KefuR`
 const date = new Date();
-let todayDate = `${date.getMonth()}-${date.getDate()}-${date.getFullYear()}`
+let todayDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+let apiData
+loadIn(baseUrl, todayDate)
 
-async function loadIn() {
-  let data = await getData(baseUrl)
+
+async function loadIn(url, selectedDate=todayDate) {
+  let data = await getData(`${url}&date=${selectedDate}`)
   saveHistory(data)
   populatePhoto(data)
-  return data
+  apiData = data
 }
 
-let data = loadIn();
+window.onload = function (url = baseUrl) {
+  document.querySelector('button[name="submit"]').addEventListener('click', function() {preLoad()})
+  document.querySelector('button[name="savebutton"]').addEventListener('click', function() {saveFavorite(apiData)})
+}
 
-// document.querySelector('submit').addEventListener('click', getFetch)
-document.querySelector('button[name="savebutton"]').addEventListener('click', function() {saveFavorite(data)})
+function preLoad() {
+  let newDate = document.querySelector('input').value
+  loadIn(baseUrl, newDate)
+}
 
 async function getData(url) {
   const response = await fetch(url)
