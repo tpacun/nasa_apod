@@ -1,9 +1,15 @@
+// declare variables, date, urls
+
 const baseUrl = `https://api.nasa.gov/planetary/apod?api_key=8chDM5TyNYtiZItHmQXpukw3SIpAkUaQei3KefuR`
 const date = new Date();
 let todayDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 let apiData;
+
+//inital load in of today's picture
+
 loadIn(baseUrl, todayDate)
 
+// calls to api and saves data, saves the date of that data to history, populates photo
 
 async function loadIn(url, selectedDate=todayDate) {
   let data = await getData(`${url}&date=${selectedDate}`)
@@ -12,21 +18,29 @@ async function loadIn(url, selectedDate=todayDate) {
   apiData = data
 }
 
+// add event listeners to buttons
+
 window.onload = function (url = baseUrl) {
   document.querySelector('button[name="submit"]').addEventListener('click', function() {preLoad()})
   document.querySelector('button[name="savebutton"]').addEventListener('click', function() {saveFavorite(apiData)})
 }
+
+// first function to call when clicking submit button, pulls value of the date selector then calls loadIn
 
 function preLoad() {
   let newDate = document.querySelector('input').value
   loadIn(baseUrl, newDate)
 }
 
+// asynchronous call to api
+
 async function getData(url) {
   const response = await fetch(url)
   const obj = await response.json()
   return obj
 }
+
+// populates photo and data from an object (returned from the api) then populates HTML with that info
 
 function populatePhoto(obj) {
   document.querySelector('main').classList.add('fade-in')
@@ -39,6 +53,8 @@ function populatePhoto(obj) {
   saveHistory(obj)
 }
 
+// saves date of the passed object's date property to localstorage. boolean value signifies if has been marked a favorite by user
+
 function saveHistory(obj) {
   let currentHistory = localStorage.getItem(obj.date)
   if (currentHistory === null) {
@@ -46,7 +62,10 @@ function saveHistory(obj) {
   }
 }
 
+// changes boolean value of key in localstorage to true, signifying it's marked as a favorite
+
 function saveFavorite(obj) {
   localStorage.setItem(obj.date, 'true')
   // document.querySelector('button[name="savebutton"]').innerText = 'Remove Photo From Favorites'
 }
+
