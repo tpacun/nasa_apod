@@ -1,7 +1,7 @@
 const baseUrl = `https://api.nasa.gov/planetary/apod?api_key=8chDM5TyNYtiZItHmQXpukw3SIpAkUaQei3KefuR`
 const date = new Date();
 let todayDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-let apiData
+let apiData;
 loadIn(baseUrl, todayDate)
 
 
@@ -30,9 +30,8 @@ async function getData(url) {
 
 function populatePhoto(obj) {
   document.querySelector('main').classList.add('fade-in')
-  document.querySelector('.title').innerText = `Photo of the day for ${obj.date}`
-  document.querySelector('.photoTitle').innerText = obj.title
-  document.querySelector('.author').innerText = obj.copyright
+  document.querySelector('.title').innerText = `Photo of the day for ${new Date(obj.date).toDateString()}: ${obj.title}`
+  document.querySelector('.author').innerText = `Photo by ${obj.copyright}`
   document.querySelector('.information').innerText = obj.explanation
   if(obj.media_type === 'image') {
     document.querySelector('img').src = obj.hdurl
