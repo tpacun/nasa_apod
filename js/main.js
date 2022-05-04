@@ -25,8 +25,6 @@ async function loadIn(url, selectedDate=todayDate) {
 window.onload = function (url = baseUrl) {
   document.querySelector('button[name="submit"]').addEventListener('click', function() {preLoad()})
   document.querySelector('button[name="savebutton"]').addEventListener('click', function() {saveFavorite(apiData)})
-  document.querySelector('button[name="clearHistory"]').addEventListener('click', function() {clearHistory()})
-  document.querySelector('button[name="clearFavorites"]').addEventListener('click', function() {clearFavorites()})
 }
 
 // first function to call when clicking submit button, pulls value of the date selector then calls loadIn
@@ -47,13 +45,29 @@ async function getData(url) {
 // populates photo and data from an object (returned from the api) then populates HTML with that info
 
 function populatePhoto(obj) {
-  document.querySelector('main').classList.add('fade-in')
+  //document.querySelector('main').classList.add('fade-in')
+  if (document.getElementById('mediaContent')) {
+    const element = document.getElementById('mediaContent')
+    element.remove()
+  }
+  if(obj.media_type === 'image') {
+    const newImg = document.createElement('img')
+    newImg.src = obj.hdurl
+    newImg.id = 'mediaContent'
+    const existingMain = document.querySelector('main')
+    existingMain.append(newImg)
+  }
+  else if (obj.media_type === 'video') {
+    const newIframe = document.createElement('iframe')
+    newIframe.src = obj.url
+    newIframe.id = 'mediaContent'
+    const existingMain = document.querySelector('main')
+    existingMain.append(newIframe)
+  }
   document.querySelector('.title').innerText = `Photo of the day for ${new Date(obj.date).toDateString()}: ${obj.title}`
   document.querySelector('.author').innerText = `Photo by ${obj.copyright}`
   document.querySelector('.information').innerText = obj.explanation
-  if(obj.media_type === 'image') {
-    document.querySelector('img').src = obj.hdurl
-  }
+
   saveHistory(obj)
 }
 
