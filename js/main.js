@@ -25,6 +25,8 @@ async function loadIn(url, selectedDate=todayDate) {
 window.onload = function (url = baseUrl) {
   document.querySelector('button[name="submit"]').addEventListener('click', function() {preLoad()})
   document.querySelector('button[name="savebutton"]').addEventListener('click', function() {saveFavorite(apiData)})
+  document.querySelector('button[name="clearHistory"]').addEventListener('click', function() {clearHistory()})
+  document.querySelector('button[name="clearFavorites"]').addEventListener('click', function() {clearFavorites()})
 }
 
 // first function to call when clicking submit button, pulls value of the date selector then calls loadIn
