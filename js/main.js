@@ -16,6 +16,7 @@ async function loadIn(url, selectedDate=todayDate) {
   saveHistory(data)
   populatePhoto(data)
   loadHistory()
+  loadFavorites()
   apiData = data
 }
 
@@ -67,6 +68,7 @@ function saveHistory(obj) {
 
 function saveFavorite(obj) {
   localStorage.setItem(obj.date, 'true')
+  loadFavorites()
   // document.querySelector('button[name="savebutton"]').innerText = 'Remove Photo From Favorites'
 }
 
@@ -75,7 +77,6 @@ function loadHistory() {
   let iteratorArray = [...new Array(localStorage.length)].forEach((c, i) => {
     const newLi = document.createElement('li')
     newLi.innerText = localStorage.key(i)
-    console.log(i, newLi.innerText)
     const existingUl = document.querySelector('.history')
     existingUl.append(newLi)
   }
@@ -85,5 +86,13 @@ function loadHistory() {
 // check for true in localstorage and display it in favorites section
 
 function loadFavorites() {
-
+  let iteratorArray = [...new Array(localStorage.length)].forEach((c, i) => {
+    if (localStorage.getItem(localStorage.key(i)) === 'true') {
+      const newLi = document.createElement('li')
+      newLi.innerText = localStorage.key(i)
+      const existingUl = document.querySelector('.favorites')
+      existingUl.append(newLi)
+    }
+  }
+  )
 }
