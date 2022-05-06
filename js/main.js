@@ -15,6 +15,7 @@ async function loadIn(url, selectedDate=todayDate) {
   let data = await getData(`${url}&date=${selectedDate}`)
   saveHistory(data)
   populatePhoto(data)
+  clearHistoryFavorites()
   loadHistory()
   loadFavorites()
   apiData = data
@@ -45,7 +46,7 @@ async function getData(url) {
 // populates photo and data from an object (returned from the api) then populates HTML with that info
 
 function populatePhoto(obj) {
-  //document.querySelector('main').classList.add('fade-in')
+  document.querySelector('main').classList.add('fade-in')
   if (document.getElementById('mediaContent')) {
     const element = document.getElementById('mediaContent')
     element.remove()
@@ -97,6 +98,14 @@ function loadHistory() {
     existingUl.append(newLi)
   }
   )
+}
+
+// clears history from page
+
+function clearHistoryFavorites() {
+  document.querySelector('.historyList').innerHTML = ''
+  document.querySelector('.favoritesList').innerHTML = ''
+
 }
 
 // check for true in localstorage and display it in favorites section
