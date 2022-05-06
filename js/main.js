@@ -94,7 +94,7 @@ function loadHistory() {
   let iteratorArray = [...new Array(localStorage.length)].forEach((c, i) => {
     const newLi = document.createElement('li')
     newLi.innerText = localStorage.key(i)
-    const existingUl = document.querySelector('.history')
+    const existingUl = document.querySelector('.historyList')
     existingUl.append(newLi)
   }
   )
@@ -115,7 +115,7 @@ function loadFavorites() {
     if (localStorage.getItem(localStorage.key(i)) === 'true') {
       const newLi = document.createElement('li')
       newLi.innerText = localStorage.key(i)
-      const existingUl = document.querySelector('.favorites')
+      const existingUl = document.querySelector('.favoritesList')
       existingUl.append(newLi)
     }
   }
